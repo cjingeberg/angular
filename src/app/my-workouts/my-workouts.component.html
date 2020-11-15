@@ -1,11 +1,33 @@
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.programName}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></tr>
-  </table>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.programName }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]="programName" />
+        <button
+          mat-button
+          *ngIf="programName"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="programName = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (click)="getRecord(row)"
+  ></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>
+
+<button mat-fab (click)="this.addWorkout()">
+  <mat-icon>add</mat-icon>
+</button>

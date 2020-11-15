@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../helpers/authentacation.service';
 import { WorkoutService } from '../helpers/workouts.service';
 import { Exercise } from '../shared/models/exercise';
+import { Workout } from '../shared/models/workout';
 
 @Component({
   selector: 'app-workout',
@@ -16,9 +17,14 @@ export class WorkoutComponent implements OnInit {
     private workoutservice: WorkoutService
   ) {
     this.route.params.subscribe((params) => {
-      this.workoutservice.getWorkout(params.id).subscribe(workout => {this.Exercises = workout.exercise});
+      this.workoutid = params.id;
+      this.workoutservice.getWorkout(params.id).subscribe(workout => {
+        this.Exercises = workout.exercise;
+      });
     });
   }
+
+  workoutid;
 
   loggedIn = this.authservice.isAuthenticated();
 
@@ -60,7 +66,13 @@ export class WorkoutComponent implements OnInit {
         this.description
       );
       
-      this.workoutservice.addExercise(exercise);
+      this.workoutservice.addExercise(exercise, this.workoutid).subscribe(res => {
+        console.log(res);
+        this.Exercises = res.exercise;
+      }, (err) => {
+        console.log(err);
+        return false;
+      });;
 
       this.exerciseName = '';
       this.repetitions = 0;

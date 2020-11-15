@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
     });
   }
   getRecord(workout: Workout):void{
-    console.log(workout._id);
     this.router.navigateByUrl("workout/"+ workout._id);
   }
 }

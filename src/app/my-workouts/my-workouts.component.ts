@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkoutService } from '../helpers/workouts.service';
+import { Workout } from '../shared/models/workout';
 
 @Component({
   selector: 'app-my-workouts',
@@ -12,6 +13,7 @@ export class MyWorkoutsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private workoutService: WorkoutService, private router: Router) { }
   displayedColumns: string[] = ['name'];
   dataSource; 
+  programName = '';
 
   
 
@@ -20,8 +22,24 @@ export class MyWorkoutsComponent implements OnInit {
      
     });
 
-    this.workoutService.getAllWorkouts().subscribe((v:any)=>{
+    this.workoutService.getWorkoutsByUserId().subscribe((v:any)=>{
       this.dataSource = v.workout;
+    });
+  }
+
+  refresh() {
+    this.workoutService.getWorkoutsByUserId().subscribe((v:any)=>{
+      this.dataSource = v.workout;
+    });
+  }
+
+  getRecord(workout: Workout):void{
+    this.router.navigateByUrl("workout/"+ workout._id);
+  }
+
+  addWorkout(){   
+    this.workoutService.addWorkout(this.programName).subscribe(() => {
+      this.refresh();
     });
   }
 }
