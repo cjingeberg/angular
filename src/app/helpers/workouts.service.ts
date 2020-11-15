@@ -9,7 +9,7 @@ import { Workout } from '../shared/models/workout';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutService {
-    readonly workoutUrl = 'http://localhost:3000/workouts'
+    readonly workoutUrl = 'https://backend-itewbz.herokuapp.com/workouts'
 
     constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {}
 

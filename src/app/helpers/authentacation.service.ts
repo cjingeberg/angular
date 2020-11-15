@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    readonly userUrl = 'http://localhost:3000/auth'
+    readonly userUrl = 'https://backend-itewbz.herokuapp.com/auth'
 
     constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {}
 

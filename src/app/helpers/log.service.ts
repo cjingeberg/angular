@@ -6,7 +6,7 @@ import { Log } from '../shared/models/log';
 
 @Injectable()
 export class LogService {
-  readonly url = 'http://localhost:3000/log';
+  readonly url = 'https://backend-itewbz.herokuapp.com/log';
 
   logs: Log[];
 
