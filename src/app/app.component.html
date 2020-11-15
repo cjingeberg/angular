@@ -1,0 +1,130 @@
+<!-- Toolbar -->
+<mat-toolbar color="primary">
+  <button
+    mat-button
+    aria-label="Example icon-button with menu icon"
+    (click)="drawer.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="margin-left: 10px">{{ title }}</span>
+  <span class="example-spacer"></span>
+  <span style="float: right; margin-left: auto; margin-right: 25px">
+    <button mat-button (click)="toggleLogin()" *ngIf="!this.isLoggedIn">Login</button>
+    <button mat-button (click)="toggleRegister()" *ngIf="!this.isLoggedIn">Sign up</button>
+    <button mat-button (click)="this.logOut()" *ngIf="this.isLoggedIn">Log Out</button>
+  </span>
+
+  <div class="form-popup" id="login" *ngIf="this.showLogin">
+    <div class="arrow-up-login"></div>
+    <form
+      class="form-container"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLoginSubmit()"
+    >
+      <h1>Login</h1>
+
+      <div>
+        <label for="email" style="display: block"><b>Email</b></label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter Email"
+          formControlName="email"
+          required
+        />
+      </div>
+      <div>
+        <label for="psw" style="display: block"><b>Password</b></label>
+        <input
+          matInput
+          type="password"
+          placeholder="Enter Password"
+          formControlName="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <button type="button" class="btn cancel" (click)="this.toggleLogin()">
+        Close
+      </button>
+    </form>
+    <div class="md-spinner" *ngIf="this.showSpinner">
+      <mat-progress-spinner
+        [mode]="'indeterminate'"
+        [diameter]="40"
+        class="spinner"
+      >
+      </mat-progress-spinner>
+    </div>
+  </div>
+
+  <div class="form-popup" id="register" *ngIf="showRegister">
+    <div class="arrow-up-register"></div>
+    <form
+      class="form-container"
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegisterSubmit()"
+    >
+      <h1>Sign up</h1>
+
+      <label for="email" style="display: block"><b>Email</b></label>
+      <input
+        type="text"
+        placeholder="Enter Email"
+        formControlName="email"
+        required
+      />
+
+      <label for="name" style="display: block"><b>Name</b></label>
+      <input
+        type="text"
+        placeholder="Enter Name"
+        formControlName="name"
+        required
+      />
+
+      <label for="psw" style="display: block"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        formControlName="password"
+        required
+      />
+
+      <button type="submit" class="btn" value="<%= username %>">Sign up</button>
+      <button
+        type="button"
+        class="btn cancel"
+        (click)="this.toggleRegister()"
+        value="<%= password %>"
+      >
+        Close
+      </button>
+    </form>
+  </div>
+
+</mat-toolbar>
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button mat-button [routerLink]="['home']">All Workouts</button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button [routerLink]="['my-workouts']">My Workouts</button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button [routerLink]="['log']">
+          Training Logs
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <div class="content" role="main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>

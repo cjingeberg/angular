@@ -1,0 +1,114 @@
+<table mat-table [dataSource]="Exercises" class="mat-elevation-z8">
+  <ng-container matColumnDef="exerciseName">
+    <th mat-header-cell *matHeaderCellDef>Exercise name</th>
+    <td mat-cell *matCellDef="let element">{{ element.exerciseName }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Exercise name</mat-label>
+        <input matInput type="text" [(ngModel)]="exerciseName" />
+        <button
+          mat-button
+          *ngIf="exerciseName"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="exerciseName = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="repetitions">
+    <th mat-header-cell *matHeaderCellDef>Repetitions</th>
+    <td mat-cell *matCellDef="let element">{{ element.repetitions }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Repetitions</mat-label>
+        <input matInput type="number" [(ngModel)]="repetitions" />
+        <button
+          mat-button
+          *ngIf="repetitions"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="repetitions = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sets">
+    <th mat-header-cell *matHeaderCellDef>Sets</th>
+    <td mat-cell *matCellDef="let element">{{ element.sets }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Sets</mat-label>
+        <input matInput type="number" [(ngModel)]="sets" />
+        <button
+          mat-button
+          *ngIf="sets"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="sets = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef>Weight</th>
+    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Weight</mat-label>
+        <input matInput type="number" [(ngModel)]="weight" />
+        <button
+          mat-button
+          *ngIf="weight"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="weight = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    <td mat-footer-cell *matFooterCellDef>
+      <mat-form-field class="example-form-field">
+        <mat-label>Description</mat-label>
+        <input matInput type="text" [(ngModel)]="description" />
+        <button
+          mat-button
+          *ngIf="description"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="description = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumnsFooter"></tr>
+</table>
+
+<button *ngIf="loggedIn" mat-fab (click)="addExercise()">
+  <mat-icon>add</mat-icon>
+</button>
